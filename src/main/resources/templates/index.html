@@ -26,9 +26,11 @@
     <nav id="menu">
         <ul class="links">
             <li><a th:href="@{/}">Főoldal</a></li>
-            <li><a th:href="@{/csapatok}">Csapatok</a></li>
-            <li><a th:href="@{/játékosok}">Játékosok</a></li>
+            <li><a href="/csapatok">Csapatok</a></li>
+            <li><a href="/jatekosok">Játékosok</a></li>
             <li><a th:href="@{/kapcsolat}">Kapcsolat</a></li>
+            <li><a href="/adatbazis">Adatbázis</a></li>
+
 
             <!-- Csak bejelentkezett felhasználónak -->
             <li sec:authorize="isAuthenticated()">
@@ -94,7 +96,7 @@
                     <img th:src="@{/images/pic02.jpg}" alt=""/>
                 </span>
                 <header class="major">
-                    <h3><a th:href="@{/játékosok}" class="link">Játékosok</a></h3>
+                    <h3><a th:href="@{/jatekosok}" class="link">Játékosok</a></h3>
                     <p>Csapatonkénti játékoslista, posztok és alapadatok.</p>
                 </header>
             </article>

@@ -1,0 +1,120 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>NB1 – Adatbázis</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+    <link rel="stylesheet" href="/assets/css/main.css"/>
+</head>
+<body class="is-preload">
+
+<div id="wrapper">
+
+    <!-- Header -->
+    <header id="header">
+        <a href="/" class="logo"><strong>NB1</strong> <span>Adatbázis</span></a>
+        <nav>
+            <a href="/logout">Kijelentkezés</a>
+        </nav>
+    </header>
+
+    <div class="inner">
+
+        <header class="major">
+            <h2>Adatbázis tartalma</h2>
+        </header>
+
+        <!-- JÁTÉKOSOK TÁBLÁJA -->
+        <section>
+            <h3>Játékosok</h3>
+
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Név</th>
+                        <th>Mez</th>
+                        <th>Klub</th>
+                        <th>Poszt</th>
+                        <th>Érték (ezer €)</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="j : ${jatekosok}">
+                        <td th:text="${j.vezeteknev + ' ' + j.utonev}"></td>
+                        <td th:text="${j.mezszam}"></td>
+                        <td th:text="${j.klub != null ? j.klub.csapatnev : 'Nincs adat'}"></td>
+                        <td th:text="${j.poszt != null ? j.poszt.nev : 'Nincs adat'}"></td>
+                        <td th:text="${j.ertek}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <hr/>
+
+        <!-- KLUBOK TÁBLÁJA -->
+        <section>
+            <h3>Klubok</h3>
+
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Csapatnév</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="k : ${klubok}">
+                        <td th:text="${k.id}"></td>
+                        <td th:text="${k.csapatnev}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <hr/>
+
+        <!-- POSZTOK TÁBLÁJA -->
+        <section>
+            <h3>Posztok</h3>
+
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Megnevezés</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="p : ${posztok}">
+                        <td th:text="${p.id}"></td>
+                        <td th:text="${p.nev}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Footer -->
+    <footer id="footer">
+        <div class="inner">
+            <ul class="copyright">
+                <li>&copy; NB1 Adatbázis</li>
+            </ul>
+        </div>
+    </footer>
+
+</div>
+
+<script src="/assets/js/jquery.min.js"></script>
+<script src="/assets/js/main.js"></script>
+
+</body>
+</html>
