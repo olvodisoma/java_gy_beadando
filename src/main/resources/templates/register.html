@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" th:href="@{/assets/css/main.css}" />
 
-    <!-- HEADER JAVÍTÁS, HOGY LÁTHATÓ LEGYEN -->
     <style>
         #header {
             background: rgba(255, 255, 255, 0.05) !important;
@@ -23,7 +22,6 @@
             color: #fff !important;
         }
 
-        /* FORM DOBOZ */
         .form-card {
             max-width: 500px;
             margin: 120px auto;
@@ -39,15 +37,25 @@
             font-size: 0.9rem;
         }
 
-        input[type=text], input[type=password] {
+        input[type=text], input[type=password], input[type=email] {
             background: rgba(255,255,255,0.12);
             border: none;
             color: #fff;
+            width: 100%;
+            padding: 8px;
         }
 
         input[type=submit] {
             background: #fff;
             color: #111;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .error {
+            color: #ff6b6b;
+            font-size: 0.9em;
         }
     </style>
 </head>
@@ -76,15 +84,24 @@
             <h2 style="color:white;">Regisztráció</h2>
             <hr style="border-color: rgba(255,255,255,0.2); margin-bottom: 25px;" />
 
-            <form th:action="@{/register}" method="post">
+            <!-- DTO-hoz kötött form -->
+            <form th:action="@{/register}" th:object="${user}" method="post">
 
                 <label for="username">Felhasználónév</label>
-                <input type="text" id="username" name="username" required />
+                <input type="text" id="username" th:field="*{username}" required />
+                <p class="error" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></p>
+
+                <br /><br />
+
+                <label for="email">Email</label>
+                <input type="email" id="email" th:field="*{email}" required />
+                <p class="error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></p>
 
                 <br /><br />
 
                 <label for="password">Jelszó</label>
-                <input type="password" id="password" name="password" required />
+                <input type="password" id="password" th:field="*{password}" required />
+                <p class="error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></p>
 
                 <br /><br />
 

@@ -1,0 +1,65 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Kapcsolat – NB1</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet" href="/assets/css/main.css"/>
+</head>
+<body>
+
+<div id="wrapper">
+
+    <header id="header">
+        <a href="/" class="logo"><strong>NB1</strong> <span>Kapcsolat</span></a>
+    </header>
+
+    <div class="inner">
+
+        <header class="major">
+            <h2>Kapcsolat</h2>
+            <p>Küldj üzenetet az oldal tulajdonosának</p>
+        </header>
+
+        <!-- Siker üzenet -->
+        <div th:if="${siker}" class="alert">
+            <p><strong>Az üzenet elküldve!</strong></p>
+        </div>
+
+        <form method="post" th:action="@{/kapcsolat}" th:object="${uzenetForm}">
+            <div class="fields">
+                <div class="field half">
+                    <label for="nev">Név</label>
+                    <input type="text" id="nev" th:field="*{nev}" />
+                    <p class="error" th:if="${#fields.hasErrors('nev')}" th:errors="*{nev}"></p>
+                </div>
+
+                <div class="field half">
+                    <label for="email">Email</label>
+                    <input type="text" id="email" th:field="*{email}" />
+                    <p class="error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></p>
+                </div>
+
+                <div class="field">
+                    <label for="uzenet">Üzenet</label>
+                    <textarea id="uzenet" rows="6" th:field="*{uzenet}"></textarea>
+                    <p class="error" th:if="${#fields.hasErrors('uzenet')}" th:errors="*{uzenet}"></p>
+                </div>
+            </div>
+
+            <ul class="actions">
+                <li><input type="submit" value="Küldés" class="primary"/></li>
+                <li><input type="reset" value="Törlés"/></li>
+            </ul>
+        </form>
+    </div>
+
+</div>
+
+<style>
+    .error { color: #ff6b6b; font-size: 0.9em; }
+    .alert { background: #d4ffd4; padding: 12px; border-radius: 8px; margin-bottom: 20px; }
+</style>
+
+</body>
+</html>
