@@ -1,26 +1,106 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Regisztráció</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" th:href="@{/assets/css/main.css}" />
+
+    <!-- HEADER JAVÍTÁS, HOGY LÁTHATÓ LEGYEN -->
+    <style>
+        #header {
+            background: rgba(255, 255, 255, 0.05) !important;
+            box-shadow: 0 0 20px rgba(0,0,0,0.3);
+            backdrop-filter: blur(10px);
+        }
+        #header .logo strong,
+        #header .logo span,
+        #header nav a {
+            color: #ffffff !important;
+            font-weight: 600 !important;
+        }
+        #menu ul.links li a {
+            color: #fff !important;
+        }
+
+        /* FORM DOBOZ */
+        .form-card {
+            max-width: 500px;
+            margin: 120px auto;
+            padding: 40px;
+            background: rgba(255,255,255,0.07);
+            border-radius: 12px;
+            box-shadow: 0 0 30px rgba(0,0,0,0.3);
+        }
+
+        label {
+            color: #fff !important;
+            letter-spacing: 2px;
+            font-size: 0.9rem;
+        }
+
+        input[type=text], input[type=password] {
+            background: rgba(255,255,255,0.12);
+            border: none;
+            color: #fff;
+        }
+
+        input[type=submit] {
+            background: #fff;
+            color: #111;
+        }
+    </style>
 </head>
+
 <body>
 
-<h2>Regisztráció</h2>
+<header id="header" class="alt">
+    <a href="/" class="logo"><strong>NB1</strong> <span>Projekt</span></a>
+    <nav>
+        <a href="#menu">Menü</a>
+    </nav>
+</header>
 
-<form th:action="@{/register}" th:object="${user}" method="post">
+<nav id="menu">
+    <ul class="links">
+        <li><a href="/">Főoldal</a></li>
+        <li><a href="/login">Bejelentkezés</a></li>
+    </ul>
+</nav>
 
-    <label>Felhasználónév:</label>
-    <input type="text" th:field="*{username}" /><br>
+<section id="main">
+    <div class="inner">
 
-    <label>Email:</label>
-    <input type="email" th:field="*{email}" /><br>
+        <div class="form-card">
 
-    <label>Jelszó:</label>
-    <input type="password" th:field="*{password}" /><br>
+            <h2 style="color:white;">Regisztráció</h2>
+            <hr style="border-color: rgba(255,255,255,0.2); margin-bottom: 25px;" />
 
-    <button type="submit">Regisztráció</button>
+            <form th:action="@{/register}" method="post">
 
-</form>
+                <label for="username">Felhasználónév</label>
+                <input type="text" id="username" name="username" required />
+
+                <br /><br />
+
+                <label for="password">Jelszó</label>
+                <input type="password" id="password" name="password" required />
+
+                <br /><br />
+
+                <input type="submit" value="Regisztráció" />
+            </form>
+
+            <p style="margin-top:20px; color:white;">
+                Már van fiókod?
+                <a href="/login" style="color:#fff; text-decoration: underline;">
+                    Jelentkezz be itt.
+                </a>
+            </p>
+
+        </div>
+    </div>
+</section>
 
 </body>
 </html>

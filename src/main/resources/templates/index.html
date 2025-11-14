@@ -1,60 +1,59 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-<!--
-	Forty by HTML5 UP
--->
 <head>
-    <title>Forty by HTML5 UP</title>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-
-    <link th:href="@{/assets/css/main.css}" rel="stylesheet" />
-    <noscript><link th:href="@{/assets/css/noscript.css}" rel="stylesheet" /></noscript>
+    <title>NB I Információs Portál</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+    <link rel="stylesheet" th:href="@{/assets/css/main.css}"/>
+    <noscript><link rel="stylesheet" th:href="@{/assets/css/noscript.css}"/></noscript>
 </head>
 <body class="is-preload">
 
-<!-- Wrapper -->
 <div id="wrapper">
 
     <!-- Header -->
     <header id="header" class="alt">
-        <a th:href="@{/}" class="logo"><strong>Forty</strong> <span>by HTML5 UP</span></a>
+        <a href="/" class="logo">
+            <strong>NB I</strong> <span>Információs Portál</span>
+        </a>
         <nav>
-            <a href="#menu">Menu</a>
+            <a href="#menu">Menü</a>
         </nav>
     </header>
 
     <!-- Menu -->
     <nav id="menu">
         <ul class="links">
+            <li><a th:href="@{/}">Főoldal</a></li>
+            <li><a th:href="@{/csapatok}">Csapatok</a></li>
+            <li><a th:href="@{/játékosok}">Játékosok</a></li>
+            <li><a th:href="@{/kapcsolat}">Kapcsolat</a></li>
 
-            <!-- MINDIG LÁTSZIK -->
-            <li><a th:href="@{/}">Home</a></li>
-
-            <!-- Csak bejelentkezett felhasználóknak -->
+            <!-- Csak bejelentkezett felhasználónak -->
             <li sec:authorize="isAuthenticated()">
                 <a th:href="@{/uzenetek}">Üzenetek</a>
             </li>
 
-            <!-- Csak ADMIN -->
+            <!-- Csak adminnak -->
             <li sec:authorize="hasRole('ADMIN')">
                 <a th:href="@{/admin}">Admin</a>
             </li>
+        </ul>
 
-            <!-- Csak NEM bejelentkezett felhasználóknak -->
+        <ul class="actions stacked">
+            <!-- Ha nincs bejelentkezve -->
             <li sec:authorize="isAnonymous()">
-                <a th:href="@{/login}">Bejelentkezés</a>
+                <a th:href="@{/login}" class="button primary fit">Bejelentkezés</a>
             </li>
             <li sec:authorize="isAnonymous()">
-                <a th:href="@{/register}">Regisztráció</a>
+                <a th:href="@{/register}" class="button fit">Regisztráció</a>
             </li>
 
-
+            <!-- Ha be van jelentkezve -->
             <li sec:authorize="isAuthenticated()">
-                <a th:href="@{/logout}">Kijelentkezés</a>
+                <a th:href="@{/logout}" class="button fit">Kijelentkezés</a>
             </li>
-
         </ul>
     </nav>
 
@@ -62,13 +61,13 @@
     <section id="banner" class="major">
         <div class="inner">
             <header class="major">
-                <h1>Hi, my name is Forty</h1>
+                <h1>Üdvözöljük az NB I Információs Portálon</h1>
             </header>
             <div class="content">
-                <p>A responsive site template designed by HTML5 UP<br />
-                    and released under the Creative Commons.</p>
+                <p>A magyar labdarúgó OTP Bank Liga hivatalos információs oldala.<br/>
+                    Csapatok, játékosok, statisztikák, érdekességek egy helyen.</p>
                 <ul class="actions">
-                    <li><a href="#one" class="button next scrolly">Get Started</a></li>
+                    <li><a href="#one" class="button next scrolly">Kezdés</a></li>
                 </ul>
             </div>
         </div>
@@ -79,147 +78,98 @@
 
         <!-- One -->
         <section id="one" class="tiles">
+
             <article>
-				<span class="image">
-					<img th:src="@{/images/pic01.jpg}" alt="" />
-				</span>
+                <span class="image">
+                    <img th:src="@{/images/pic01.jpg}" alt=""/>
+                </span>
                 <header class="major">
-                    <h3><a href="landing.html" class="link">Aliquam</a></h3>
-                    <p>Ipsum dolor sit amet</p>
+                    <h3><a th:href="@{/csapatok}" class="link">NB I Csapatok</a></h3>
+                    <p>Ismerd meg a bajnokság csapatait, stadionjait, történetét.</p>
                 </header>
             </article>
 
             <article>
-				<span class="image">
-					<img th:src="@{/images/pic02.jpg}" alt="" />
-				</span>
+                <span class="image">
+                    <img th:src="@{/images/pic02.jpg}" alt=""/>
+                </span>
                 <header class="major">
-                    <h3><a href="landing.html" class="link">Tempus</a></h3>
-                    <p>feugiat amet tempus</p>
+                    <h3><a th:href="@{/játékosok}" class="link">Játékosok</a></h3>
+                    <p>Csapatonkénti játékoslista, posztok és alapadatok.</p>
                 </header>
             </article>
 
             <article>
-				<span class="image">
-					<img th:src="@{/images/pic03.jpg}" alt="" />
-				</span>
+                <span class="image">
+                    <img th:src="@{/images/pic03.jpg}" alt=""/>
+                </span>
                 <header class="major">
-                    <h3><a href="landing.html" class="link">Magna</a></h3>
-                    <p>Lorem etiam nullam</p>
+                    <h3><a th:href="@{/kapcsolat}" class="link">Kapcsolat</a></h3>
+                    <p>Lépjen kapcsolatba velünk – visszajelzés, üzenetküldés.</p>
                 </header>
             </article>
 
             <article>
-				<span class="image">
-					<img th:src="@{/images/pic04.jpg}" alt="" />
-				</span>
+                <span class="image">
+                    <img th:src="@{/images/pic04.jpg}" alt=""/>
+                </span>
                 <header class="major">
-                    <h3><a href="landing.html" class="link">Ipsum</a></h3>
-                    <p>Nisl sed aliquam</p>
+                    <h3><a th:href="@{/diagram}" class="link">Statisztikák</a></h3>
+                    <p>Diagramok és grafikonok az NB I adatai alapján.</p>
                 </header>
             </article>
 
-            <article>
-				<span class="image">
-					<img th:src="@{/images/pic05.jpg}" alt="" />
-				</span>
-                <header class="major">
-                    <h3><a href="landing.html" class="link">Consequat</a></h3>
-                    <p>Ipsum dolor sit amet</p>
-                </header>
-            </article>
-
-            <article>
-				<span class="image">
-					<img th:src="@{/images/pic06.jpg}" alt="" />
-				</span>
-                <header class="major">
-                    <h3><a href="landing.html" class="link">Etiam</a></h3>
-                    <p>Feugiat amet tempus</p>
-                </header>
-            </article>
         </section>
 
         <!-- Two -->
         <section id="two">
             <div class="inner">
                 <header class="major">
-                    <h2>Massa libero</h2>
+                    <h2>A magyar labdarúgásról röviden</h2>
                 </header>
-                <p>Nullam et orci eu lorem consequat tincidunt vivamus et sagittis libero...</p>
+                <p>
+                    Az OTP Bank Liga, hivatalos nevén NB I, Magyarország legmagasabb szintű labdarúgó-bajnoksága.
+                    A ligában 12 csapat szerepel, amelyek az idény során három körben mérkőznek meg egymással.
+                    A bajnokság nagy múltú együtteseket és feltörekvő klubokat foglal magába, amelyek
+                    meghatározó szereplői a hazai sportéletnek.
+                </p>
+
+                <p>
+                    Oldalunkon megtalálhatók a csapatok, játékosok, mérkőzések, üzenetek és statisztikák.
+                    Az adatok a kiválasztott adatbázisból töltődnek be, valós időben.
+                </p>
+
                 <ul class="actions">
-                    <li><a href="landing.html" class="button next">Get Started</a></li>
+                    <li><a th:href="@{/csapatok}" class="button next">Fedezd fel a csapatokat</a></li>
                 </ul>
             </div>
         </section>
 
     </div>
 
-    <!-- Contact -->
+    <!-- Contact (Eredeti Forty rész megtartható, de nálad külön Kontakt menü is lesz) -->
     <section id="contact">
         <div class="inner">
-            <section>
-                <form method="post" action="#">
-                    <div class="fields">
-                        <div class="field half">
-                            <label for="name">Name</label>
-                            <input type="text" name="name" id="name" />
-                        </div>
-                        <div class="field half">
-                            <label for="email">Email</label>
-                            <input type="text" name="email" id="email" />
-                        </div>
-                        <div class="field">
-                            <label for="message">Message</label>
-                            <textarea name="message" id="message" rows="6"></textarea>
-                        </div>
-                    </div>
-                    <ul class="actions">
-                        <li><input type="submit" value="Send Message" class="primary" /></li>
-                        <li><input type="reset" value="Clear" /></li>
-                    </ul>
-                </form>
-            </section>
+
             <section class="split">
                 <section>
                     <div class="contact-method">
-                        <span class="icon solid alt fa-envelope"></span>
-                        <h3>Email</h3>
-                        <a href="#">information@untitled.tld</a>
-                    </div>
-                </section>
-                <section>
-                    <div class="contact-method">
-                        <span class="icon solid alt fa-phone"></span>
-                        <h3>Phone</h3>
-                        <span>(000) 000-0000 x12387</span>
-                    </div>
-                </section>
-                <section>
-                    <div class="contact-method">
                         <span class="icon solid alt fa-home"></span>
-                        <h3>Address</h3>
-                        <span>1234 Somewhere Road #5432<br />
-									Nashville, TN 00000<br />
-									United States of America</span>
+                        <h3>NB I Központ</h3>
+                        <span>Budapest<br/>
+                            Magyarország</span>
                     </div>
                 </section>
             </section>
+
         </div>
     </section>
 
     <!-- Footer -->
     <footer id="footer">
         <div class="inner">
-            <ul class="icons">
-                <li><a href="#" class="icon brands alt fa-twitter"><span class="label">Twitter</span></a></li>
-                <li><a href="#" class="icon brands alt fa-facebook-f"><span class="label">Facebook</span></a></li>
-                <li><a href="#" class="icon brands alt fa-instagram"><span class="label">Instagram</span></a></li>
-                <li><a href="#" class="icon brands alt fa-github"><span class="label">GitHub</span></a></li>
-                <li><a href="#" class="icon brands alt fa-linkedin-in"><span class="label">LinkedIn</span></a></li>
-            </ul>
             <ul class="copyright">
-                <li>&copy; Untitled</li><li>Design: <a href="https://html5up.net">HTML5 UP</a></li>
+                <li>&copy; NB I Információs Portál</li>
             </ul>
         </div>
     </footer>

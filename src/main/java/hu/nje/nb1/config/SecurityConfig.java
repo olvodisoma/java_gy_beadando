@@ -30,19 +30,30 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
 
                 .authorizeHttpRequests(auth -> auth
+                        // Nyilvánosan elérhető oldalak + statikus fájlok
                         .requestMatchers(
-                                "/register",
+                                "/",
                                 "/login",
-                                "/css/**",
-                                "/js/**",
+                                "/register",
+                                "/assets/**",
                                 "/images/**",
-                                "/assets/**"
+                                "/css/**",
+                                "/js/**"
                         ).permitAll()
-                        .anyRequest().authenticated()
+
+                        // Üzenetek menü minden bejelentkezett felhasználónak
+                        .requestMatchers("/uzenetek/**").authenticated()
+
+                        // Admin menü csak adminnak
+                        .requestMatchers("/admin/**").hasRole("ADMIN")
+
+                        // minden más oldal is elérhető bejelentkezve
+                        .anyRequest().permitAll()
                 )
 
                 .formLogin(form -> form
                         .loginPage("/login")
+                        .loginProcessingUrl("/login")   // fontos!
                         .defaultSuccessUrl("/", true)
                         .permitAll()
                 )
@@ -67,4 +78,3 @@ public class SecurityConfig {
         return auth.build();
     }
 }
-
