@@ -1,0 +1,164 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <title>NB I – Diagram</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+    <link rel="stylesheet" th:href="@{/assets/css/main.css}"/>
+    <noscript><link rel="stylesheet" th:href="@{/assets/css/noscript.css}"/></noscript>
+
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="is-preload">
+
+<div id="wrapper">
+
+    <!-- Header -->
+    <header id="header" class="alt">
+        <a href="/" class="logo">
+            <strong>NB I</strong> <span>Információs Portál</span>
+        </a>
+        <nav>
+            <a href="#menu">Menü</a>
+        </nav>
+    </header>
+
+    <!-- Menu -->
+    <nav id="menu">
+        <ul class="links">
+            <li><a th:href="@{/}">Főoldal</a></li>
+            <li><a th:href="@{/csapatok}">Csapatok</a></li>
+            <li><a th:href="@{/jatekosok}">Játékosok</a></li>
+            <li><a th:href="@{/kapcsolat}">Kapcsolat</a></li>
+            <li><a th:href="@{/adatbazis}">Adatbázis</a></li>
+            <li><a th:href="@{/diagram}">Diagram</a></li>
+
+            <!-- Csak bejelentkezett felhasználónak -->
+            <li sec:authorize="isAuthenticated()">
+                <a th:href="@{/uzenetek}">Üzenetek</a>
+            </li>
+
+            <!-- Csak adminnak -->
+            <li sec:authorize="hasRole('ADMIN')">
+                <a th:href="@{/admin}">Admin</a>
+            </li>
+        </ul>
+
+        <ul class="actions stacked">
+            <!-- Ha nincs bejelentkezve -->
+            <li sec:authorize="isAnonymous()">
+                <a th:href="@{/login}" class="button primary fit">Bejelentkezés</a>
+            </li>
+            <li sec:authorize="isAnonymous()">
+                <a th:href="@{/register}" class="button fit">Regisztráció</a>
+            </li>
+
+            <!-- Ha be van jelentkezve -->
+            <li sec:authorize="isAuthenticated()">
+                <a th:href="@{/logout}" class="button fit">Kijelentkezés</a>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- Banner -->
+    <section id="banner" class="major">
+        <div class="inner">
+            <header class="major">
+                <h1>NB I Statisztikai Diagram</h1>
+            </header>
+            <div class="content">
+                <p>Játékosok száma posztonként az adatbázis adatai alapján.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main -->
+    <div id="main">
+        <section class="inner">
+            <header class="major">
+                <h2>Posztok szerinti megoszlás</h2>
+            </header>
+
+            <p>Az alábbi oszlopdiagram a labdarúgók számát mutatja különböző posztok szerint.</p>
+
+            <div class="box">
+                <canvas id="statsChart"></canvas>
+            </div>
+
+       <script th:inline="javascript">
+    /*<![CDATA[*/
+    const labels = /*[[${labels}]]*/ [];
+    const values = /*[[${values}]]*/ [];
+
+    console.log('labels:', labels);
+    console.log('values:', values);
+
+    const ctx = document.getElementById('statsChart').getContext('2d');
+
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Játékosok száma',
+                data: values
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        precision: 0
+                    }
+                }
+            }
+        }
+    });
+    /*]]>*/
+</script>
+
+        </section>
+    </div>
+
+    <!-- Contact info blokk (opcionális, a sablon része) -->
+    <section id="contact">
+        <div class="inner">
+            <section class="split">
+                <section>
+                    <div class="contact-method">
+                        <span class="icon solid alt fa-home"></span>
+                        <h3>NB I Központ</h3>
+                        <span>Budapest<br/>
+                              Magyarország</span>
+                    </div>
+                </section>
+            </section>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="footer">
+        <div class="inner">
+            <ul class="copyright">
+                <li>&copy; NB I Információs Portál</li>
+            </ul>
+        </div>
+    </footer>
+
+</div>
+
+<!-- Scripts -->
+<script th:src="@{/assets/js/jquery.min.js}"></script>
+<script th:src="@{/assets/js/jquery.scrolly.min.js}"></script>
+<script th:src="@{/assets/js/jquery.scrollex.min.js}"></script>
+<script th:src="@{/assets/js/browser.min.js}"></script>
+<script th:src="@{/assets/js/breakpoints.min.js}"></script>
+<script th:src="@{/assets/js/util.js}"></script>
+<script th:src="@{/assets/js/main.js}"></script>
+
+</body>
+</html>

@@ -108,4 +108,5 @@ public class Labdarugo {
     public void setErtek(Integer ertek) {
         this.ertek = ertek;
     }
+    
 }
