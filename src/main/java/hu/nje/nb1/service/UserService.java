@@ -9,6 +9,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
+import java.util.List;
 
 @Service
 public class UserService {
@@ -25,6 +26,7 @@ public class UserService {
         this.passwordEncoder = passwordEncoder;
     }
 
+    // 🔹 REGISZTRÁCIÓ – ez a régi, ezt MEGTARTJUK
     public void registerUser(RegistrationDto dto) {
 
         User user = new User();
@@ -49,5 +51,25 @@ public class UserService {
         user.setRoles(roles);
 
         userRepository.save(user);
+    }
+
+    // 🔹 ADMIN MENÜHÖZ: összes felhasználó listázása
+    public List<User> findAll() {
+        return userRepository.findAll();
+    }
+
+    // 🔹 ADMIN MENÜHÖZ: felhasználó törlése (ADMIN nem törölhető)
+    public void deleteUser(Long id) {
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Nincs ilyen felhasználó"));
+
+        boolean isAdmin = user.getRoles().stream()
+                .anyMatch(role -> "ROLE_ADMIN".equals(role.getName()));
+
+        if (isAdmin) {
+            throw new IllegalStateException("ADMINT nem lehet törölni!");
+        }
+
+        userRepository.deleteById(id);
     }
 }

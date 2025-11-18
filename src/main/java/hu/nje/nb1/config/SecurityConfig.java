@@ -46,7 +46,7 @@ public class SecurityConfig {
                         .requestMatchers("/api/**").hasRole("ADMIN")
                         // Admin menü csak adminnak
                         .requestMatchers("/admin/**").hasRole("ADMIN")
-
+                        
                         // minden más oldal is elérhető bejelentkezve
                         .anyRequest().permitAll()
                 )
