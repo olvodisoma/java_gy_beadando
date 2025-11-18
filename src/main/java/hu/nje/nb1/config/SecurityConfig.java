@@ -9,7 +9,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-
+import org.springframework.security.config.Customizer;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
@@ -43,7 +43,7 @@ public class SecurityConfig {
 
                         // Üzenetek menü minden bejelentkezett felhasználónak
                         .requestMatchers("/uzenetek/**").authenticated()
-
+                        .requestMatchers("/api/**").hasRole("ADMIN")
                         // Admin menü csak adminnak
                         .requestMatchers("/admin/**").hasRole("ADMIN")
 
@@ -62,7 +62,9 @@ public class SecurityConfig {
                         .logoutUrl("/logout")
                         .logoutSuccessUrl("/login?logout")
                         .permitAll()
-                );
+                )
+                  .httpBasic(Customizer.withDefaults());
+                ;
 
         return http.build();
     }
