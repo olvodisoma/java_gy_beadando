@@ -71,7 +71,16 @@ input, select, textarea {
 	-ms-appearance: none;
 	appearance: none;
 }
-
+input[type="number"]  {
+    color: #000 !important;
+    background-color: #fff !important;
+    border: 1px solid #ccc !important;
+}
+input[type="date"] {
+    color: #000 !important;
+    background-color: #fff !important;
+    border: 1px solid #ccc !important;
+}
 /* Basic */
 
 	@-ms-viewport {

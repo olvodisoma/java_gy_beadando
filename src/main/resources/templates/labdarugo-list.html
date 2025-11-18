@@ -1,0 +1,55 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Labdarúgók – CRUD</title>
+    <meta charset="utf-8"/>
+    <link rel="stylesheet" th:href="@{/assets/css/main.css}"/>
+</head>
+<body class="is-preload">
+<div id="wrapper">
+
+    <header id="header" class="alt">
+        <a href="/" class="logo"><strong>NB I</strong> <span>Labdarúgók CRUD</span></a>
+    </header>
+
+    <div id="main" class="inner">
+        <header class="major">
+            <h2>Labdarúgók listája</h2>
+        </header>
+
+        <a class="button primary" th:href="@{/labdarugok/uj}">Új labdarúgó hozzáadása</a>
+
+        <div class="table-wrapper" style="margin-top: 1.5rem;">
+            <table>
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Mezszám</th>
+                    <th>Vezetéknév</th>
+                    <th>Utónév</th>
+                    <th>Szül. idő</th>
+                    <th>Műveletek</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="j : ${labdarugok}">
+                    <td th:text="${j.id}"></td>
+                    <td th:text="${j.mezszam}"></td>
+                    <td th:text="${j.vezeteknev}"></td>
+                    <td th:text="${j.utonev}"></td>
+                    <td th:text="${j.szulido}"></td>
+                    <td>
+                        <a th:href="@{'/labdarugok/modosit/' + ${j.id}}" class="button small">Módosítás</a>
+                        <a th:href="@{'/labdarugok/torol/' + ${j.id}}" class="button small">Törlés</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+
+<script th:src="@{/assets/js/main.js}"></script>
+</body>
+</html>

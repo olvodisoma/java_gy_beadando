@@ -4,6 +4,7 @@ import hu.nje.nb1.model.Labdarugo;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface LabdarugoRepository extends JpaRepository<Labdarugo, Integer> {
-long countByPoszt_Id(Integer posztId);
+    boolean existsById(Integer id);
+    long countByPoszt_Id(Integer posztId);
 }
 

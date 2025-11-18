@@ -1,0 +1,63 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Labdarúgó – Új / Módosítás</title>
+    <meta charset="utf-8"/>
+    <link rel="stylesheet" th:href="@{/assets/css/main.css}"/>
+</head>
+<body class="is-preload">
+<div id="wrapper">
+
+    <header id="header" class="alt">
+        <a href="/" class="logo"><strong>NB I</strong> <span>Labdarúgó szerkesztés</span></a>
+    </header>
+
+    <div id="main" class="inner">
+        <header class="major">
+            <h2>Labdarúgó adatainak megadása</h2>
+        </header>
+
+        <form th:action="@{/labdarugok/mentes}" th:object="${labdarugo}" method="post">
+                <input type="hidden" name="modositas" th:value="${modositas}" />
+
+            <label>Azonosító (ID)</label>
+            <input type="number" th:field="*{id}" required/>
+
+            <label>Mezszám</label>
+            <input type="number" th:field="*{mezszam}"/>
+
+            <label>Vezetéknév</label>
+            <input type="text" th:field="*{vezeteknev}"/>
+
+            <label>Utónév</label>
+            <input type="text" th:field="*{utonev}"/>
+
+            <label>Születési dátum</label>
+            <input type="date" th:field="*{szulido}"/>
+
+            <label>Magyar (1/0)</label>
+            <input type="number" th:field="*{magyar}"/>
+
+            <label>Külföldi (1/0)</label>
+            <input type="number" th:field="*{kulfoldi}"/>
+
+            <label>Érték</label>
+            <input type="number" th:field="*{ertek}"/>
+
+            <ul class="actions">
+                <li><button type="submit" class="button primary">Mentés</button></li>
+                <li><a th:href="@{/labdarugok}" class="button">Mégse</a></li>
+            </ul>
+        </form>
+
+        <p th:if="${hiba}" style="color:red; font-weight:bold;">
+            [[${hiba}]]
+        </p>
+
+    </div>
+
+</div>
+
+<script th:src="@{/assets/js/main.js}"></script>
+</body>
+</html>
