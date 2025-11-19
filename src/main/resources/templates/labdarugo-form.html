@@ -9,7 +9,7 @@
 <div id="wrapper">
 
     <header id="header" class="alt">
-        <a href="/" class="logo"><strong>NB I</strong> <span>Labdarúgó szerkesztés</span></a>
+        <a th:href="@{/}" class="logo"><strong>NB I</strong> <span>Labdarúgó szerkesztés</span></a>
     </header>
 
     <div id="main" class="inner">
@@ -18,7 +18,7 @@
         </header>
 
         <form th:action="@{/labdarugok/mentes}" th:object="${labdarugo}" method="post">
-                <input type="hidden" name="modositas" th:value="${modositas}" />
+            <input type="hidden" name="modositas" th:value="${modositas}" />
 
             <label>Azonosító (ID)</label>
             <input type="number" th:field="*{id}" required/>

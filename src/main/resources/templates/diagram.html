@@ -5,6 +5,8 @@
     <title>NB I – Diagram</title>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+
+    <!-- CSS -->
     <link rel="stylesheet" th:href="@{/assets/css/main.css}"/>
     <noscript><link rel="stylesheet" th:href="@{/assets/css/noscript.css}"/></noscript>
 
@@ -17,7 +19,7 @@
 
     <!-- Header -->
     <header id="header" class="alt">
-        <a href="/" class="logo">
+        <a th:href="@{/}" class="logo">
             <strong>NB I</strong> <span>Információs Portál</span>
         </a>
         <nav>
@@ -35,34 +37,30 @@
             <li><a th:href="@{/adatbazis}">Adatbázis</a></li>
             <li><a th:href="@{/diagram}">Diagram</a></li>
 
-            <!-- Csak bejelentkezett felhasználónak -->
             <li sec:authorize="isAuthenticated()">
                 <a th:href="@{/uzenetek}">Üzenetek</a>
             </li>
 
-            <!-- Csak adminnak -->
             <li sec:authorize="hasRole('ADMIN')">
                 <a th:href="@{/admin}">Admin</a>
             </li>
         </ul>
 
         <ul class="actions stacked">
-            <!-- Ha nincs bejelentkezve -->
             <li sec:authorize="isAnonymous()">
                 <a th:href="@{/login}" class="button primary fit">Bejelentkezés</a>
             </li>
+
             <li sec:authorize="isAnonymous()">
                 <a th:href="@{/register}" class="button fit">Regisztráció</a>
             </li>
 
-            <!-- Ha be van jelentkezve -->
             <li sec:authorize="isAuthenticated()">
                 <a th:href="@{/logout}" class="button fit">Kijelentkezés</a>
             </li>
         </ul>
     </nav>
 
-    <!-- Banner -->
     <section id="banner" class="major">
         <div class="inner">
             <header class="major">
@@ -87,53 +85,48 @@
                 <canvas id="statsChart"></canvas>
             </div>
 
-       <script th:inline="javascript">
-    /*<![CDATA[*/
-    const labels = /*[[${labels}]]*/ [];
-    const values = /*[[${values}]]*/ [];
+            <!-- Chart.js adatátadás -->
+            <script th:inline="javascript">
+                /*<![CDATA[*/
+                const labels = /*[[${labels}]]*/ [];
+                const values = /*[[${values}]]*/ [];
 
-    console.log('labels:', labels);
-    console.log('values:', values);
+                const ctx = document.getElementById('statsChart').getContext('2d');
 
-    const ctx = document.getElementById('statsChart').getContext('2d');
-
-    new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: labels,
-            datasets: [{
-                label: 'Játékosok száma',
-                data: values
-            }]
-        },
-        options: {
-            responsive: true,
-            scales: {
-                y: {
-                    beginAtZero: true,
-                    ticks: {
-                        precision: 0
+                new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            label: 'Játékosok száma',
+                            data: values
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                ticks: {
+                                    precision: 0
+                                }
+                            }
+                        }
                     }
-                }
-            }
-        }
-    });
-    /*]]>*/
-</script>
+                });
+                /*]]>*/
+            </script>
 
         </section>
     </div>
 
-    <!-- Contact info blokk (opcionális, a sablon része) -->
     <section id="contact">
         <div class="inner">
             <section class="split">
                 <section>
                     <div class="contact-method">
-                        <span class="icon solid alt fa-home"></span>
                         <h3>NB I Központ</h3>
-                        <span>Budapest<br/>
-                              Magyarország</span>
+                        <span>Budapest<br/>Magyarország</span>
                     </div>
                 </section>
             </section>

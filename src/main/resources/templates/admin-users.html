@@ -11,14 +11,16 @@
 <div id="wrapper">
 
     <header id="header" class="alt">
-        <a href="/" class="logo"><strong>NB I</strong> <span>Admin</span></a>
+        <a th:href="@{/}" class="logo"><strong>NB I</strong> <span>Admin</span></a>
         <nav><a href="#menu">Menü</a></nav>
     </header>
 
+    <!-- MENÜ -->
     <nav id="menu">
         <ul class="links">
-            <li><a href="/">Főoldal</a></li>
-            <li><a href="/admin">Admin</a></li>
+            <!-- HIBAJAVÍTÁS: rossz volt az idézőjel -->
+            <li><a th:href="@{/}">Főoldal</a></li>
+            <li><a th:href="@{/admin}">Admin</a></li>
         </ul>
     </nav>
 
@@ -27,6 +29,7 @@
 
             <h2>Felhasználók kezelése</h2>
 
+            <!-- HIBAJELZÉS -->
             <div th:if="${hiba}" style="color:red; font-weight:bold;">
                 <p th:text="${hiba}"></p>
             </div>
@@ -51,14 +54,16 @@
                         <span th:each="role : ${user.roles}"
                               th:text="${role.name} + ' '"></span>
                     </td>
+
                     <td>
+                        <!-- Admin nem törölhető -->
                         <a th:href="@{'/admin/torol/' + ${user.id}}"
                            class="button small"
-                           th:if="${#lists.contains(user.roles.?[name=='ROLE_ADMIN'], null) == false}">
+                           th:if="${!#lists.contains(user.roles.?[name=='ROLE_ADMIN'], 'ROLE_ADMIN')}">
                             Törlés
                         </a>
 
-                        <span th:if="${#lists.contains(user.roles.?[name=='ROLE_ADMIN'], null) == true}">
+                        <span th:if="${#lists.contains(user.roles.?[name=='ROLE_ADMIN'], 'ROLE_ADMIN')}">
                             (Admin, nem törölhető)
                         </span>
                     </td>

@@ -4,7 +4,7 @@
     <title>NB1 – Adatbázis</title>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
-    <link rel="stylesheet" href="/assets/css/main.css"/>
+    <link rel="stylesheet" th:href="@{/assets/css/main.css}"/>
 </head>
 <body class="is-preload">
 
@@ -12,9 +12,9 @@
 
     <!-- Header -->
     <header id="header">
-        <a href="/" class="logo"><strong>NB1</strong> <span>Adatbázis</span></a>
+        <a th:href="@{/' }" class="logo"><strong>NB1</strong> <span>Adatbázis</span></a>
         <nav>
-            <a href="/logout">Kijelentkezés</a>
+            <a th:href="@{/logout}">Kijelentkezés</a>
         </nav>
     </header>
 
@@ -24,7 +24,7 @@
             <h2>Adatbázis tartalma</h2>
         </header>
 
-        <!-- JÁTÉKOSOK TÁBLÁJA -->
+        <!-- JÁTÉKOSOK -->
         <section>
             <h3>Játékosok</h3>
 
@@ -54,7 +54,7 @@
 
         <hr/>
 
-        <!-- KLUBOK TÁBLÁJA -->
+        <!-- KLUBOK -->
         <section>
             <h3>Klubok</h3>
 
@@ -78,7 +78,7 @@
 
         <hr/>
 
-        <!-- POSZTOK TÁBLÁJA -->
+        <!-- POSZTOK -->
         <section>
             <h3>Posztok</h3>
 
@@ -113,8 +113,8 @@
 
 </div>
 
-<script src="/assets/js/jquery.min.js"></script>
-<script src="/assets/js/main.js"></script>
+<script th:src="@{/assets/js/jquery.min.js}"></script>
+<script th:src="@{/assets/js/main.js}"></script>
 
 </body>
 </html>

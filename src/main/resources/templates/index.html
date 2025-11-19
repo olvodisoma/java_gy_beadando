@@ -14,7 +14,7 @@
 
     <!-- Header -->
     <header id="header" class="alt">
-        <a href="/" class="logo">
+        <a th:href="@{/}" class="logo">
             <strong>NB I</strong> <span>Információs Portál</span>
         </a>
         <nav>
@@ -26,14 +26,12 @@
     <nav id="menu">
         <ul class="links">
             <li><a th:href="@{/}">Főoldal</a></li>
-            <li><a href="/csapatok">Csapatok</a></li>
-            <li><a href="/jatekosok">Játékosok</a></li>
+            <li><a th:href="@{/csapatok}">Csapatok</a></li>
+            <li><a th:href="@{/jatekosok}">Játékosok</a></li>
             <li><a th:href="@{/kapcsolat}">Kapcsolat</a></li>
-            <li><a href="/adatbazis">Adatbázis</a></li>
-            <li><a href="/diagram">Diagramok</a></li>
-            <li><li><a th:href="@{/labdarugok}">Játékosok (CRUD)</a></li></li>
-        
-
+            <li><a th:href="@{/adatbazis}">Adatbázis</a></li>
+            <li><a th:href="@{/diagram}">Diagramok</a></li>
+            <li><a th:href="@{/labdarugok}">Játékosok (CRUD)</a></li>
 
             <!-- Csak bejelentkezett felhasználónak -->
             <li sec:authorize="isAuthenticated()">
@@ -134,14 +132,11 @@
                 </header>
                 <p>
                     Az OTP Bank Liga, hivatalos nevén NB I, Magyarország legmagasabb szintű labdarúgó-bajnoksága.
-                    A ligában 12 csapat szerepel, amelyek az idény során három körben mérkőznek meg egymással.
-                    A bajnokság nagy múltú együtteseket és feltörekvő klubokat foglal magába, amelyek
-                    meghatározó szereplői a hazai sportéletnek.
                 </p>
 
                 <p>
                     Oldalunkon megtalálhatók a csapatok, játékosok, mérkőzések, üzenetek és statisztikák.
-                    Az adatok a kiválasztott adatbázisból töltődnek be, valós időben.
+                    Az adatok valós időben töltődnek be.
                 </p>
 
                 <ul class="actions">
@@ -152,25 +147,20 @@
 
     </div>
 
-    <!-- Contact (Eredeti Forty rész megtartható, de nálad külön Kontakt menü is lesz) -->
+    <!-- Contact -->
     <section id="contact">
         <div class="inner">
-
             <section class="split">
                 <section>
                     <div class="contact-method">
-                        <span class="icon solid alt fa-home"></span>
                         <h3>NB I Központ</h3>
-                        <span>Budapest<br/>
-                            Magyarország</span>
+                        <span>Budapest<br/>Magyarország</span>
                     </div>
                 </section>
             </section>
-
         </div>
     </section>
 
-    <!-- Footer -->
     <footer id="footer">
         <div class="inner">
             <ul class="copyright">

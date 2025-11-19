@@ -14,7 +14,7 @@
 
     <!-- Header -->
     <header id="header" class="alt">
-        <a href="/" class="logo">
+        <a th:href="@{/}" class="logo">
             <strong>NB I</strong> <span>Információs Portál</span>
         </a>
         <nav>
@@ -31,19 +31,16 @@
             <li><a th:href="@{/kapcsolat}">Kapcsolat</a></li>
             <li><a th:href="@{/adatbazis}">Adatbázis</a></li>
 
-            <!-- Csak bejelentkezett felhasználónak -->
             <li sec:authorize="isAuthenticated()">
                 <a th:href="@{/uzenetek}">Üzenetek</a>
             </li>
 
-            <!-- Csak adminnak -->
             <li sec:authorize="hasRole('ADMIN')">
                 <a th:href="@{/admin}">Admin</a>
             </li>
         </ul>
 
         <ul class="actions stacked">
-            <!-- Ha nincs bejelentkezve -->
             <li sec:authorize="isAnonymous()">
                 <a th:href="@{/login}" class="button primary fit">Bejelentkezés</a>
             </li>
@@ -51,14 +48,13 @@
                 <a th:href="@{/register}" class="button fit">Regisztráció</a>
             </li>
 
-            <!-- Ha be van jelentkezve -->
             <li sec:authorize="isAuthenticated()">
                 <a th:href="@{/logout}" class="button fit">Kijelentkezés</a>
             </li>
         </ul>
     </nav>
 
-    <!-- Banner (kisebb fejléccel, csak címnek) -->
+    <!-- Banner -->
     <section id="banner" class="major">
         <div class="inner">
             <header class="major">
@@ -91,10 +87,10 @@
                     </thead>
                     <tbody>
                     <tr th:each="uzenet : ${uzenetek}">
-                        <td th:text="${#temporals.format(uzenet.kuldesIdeje, 'yyyy-MM-dd HH:mm')}">2025-01-01 12:00</td>
-                        <td th:text="${uzenet.nev}">Minta Név</td>
-                        <td th:text="${uzenet.email}">minta@example.com</td>
-                        <td th:text="${uzenet.uzenet}">Minta üzenet szövege...</td>
+                        <td th:text="${#temporals.format(uzenet.kuldesIdeje, 'yyyy-MM-dd HH:mm')}"></td>
+                        <td th:text="${uzenet.nev}"></td>
+                        <td th:text="${uzenet.email}"></td>
+                        <td th:text="${uzenet.uzenet}"></td>
                     </tr>
                     </tbody>
                 </table>
@@ -102,7 +98,6 @@
         </section>
     </div>
 
-    <!-- Contact info blokk – maradhat egyszerű -->
     <section id="contact">
         <div class="inner">
             <section class="split">
@@ -110,8 +105,7 @@
                     <div class="contact-method">
                         <span class="icon solid alt fa-home"></span>
                         <h3>NB I Központ</h3>
-                        <span>Budapest<br/>
-                              Magyarország</span>
+                        <span>Budapest<br/>Magyarország</span>
                     </div>
                 </section>
             </section>

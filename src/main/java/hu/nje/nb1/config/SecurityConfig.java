@@ -10,6 +10,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.config.Customizer;
+
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
@@ -30,30 +31,24 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
 
                 .authorizeHttpRequests(auth -> auth
-                        // Nyilvánosan elérhető oldalak + statikus fájlok
                         .requestMatchers(
                                 "/",
                                 "/login",
                                 "/register",
                                 "/assets/**",
-                                "/images/**",
                                 "/css/**",
-                                "/js/**"
+                                "/js/**",
+                                "/images/**"
                         ).permitAll()
 
-                        // Üzenetek menü minden bejelentkezett felhasználónak
                         .requestMatchers("/uzenetek/**").authenticated()
-                        .requestMatchers("/api/**").hasRole("ADMIN")
-                        // Admin menü csak adminnak
                         .requestMatchers("/admin/**").hasRole("ADMIN")
-                        
-                        // minden más oldal is elérhető bejelentkezve
-                        .anyRequest().permitAll()
+                        .anyRequest().authenticated()
                 )
 
                 .formLogin(form -> form
                         .loginPage("/login")
-                        .loginProcessingUrl("/login")   // fontos!
+                        .loginProcessingUrl("/login")
                         .defaultSuccessUrl("/", true)
                         .permitAll()
                 )
@@ -63,8 +58,8 @@ public class SecurityConfig {
                         .logoutSuccessUrl("/login?logout")
                         .permitAll()
                 )
-                  .httpBasic(Customizer.withDefaults());
-                ;
+
+                .httpBasic(Customizer.withDefaults());
 
         return http.build();
     }
